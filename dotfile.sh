@@ -52,7 +52,11 @@ if [ "$STEP3" = 1 ]; then
 
 	sudo yum -y remove vim vim-enhanced && \
 	sudo yum -y install ncurses-devel && \
+	mkdir install_vim7.3/ && \
 	cd ./install_vim7.3/ && \
+	wget ftp://ftp.vim.org/pub/vim/unix/vim-7.3.tar.bz2 && \
+	wget ftp://ftp.jp.vim.org/pub/vim/extra/vim-7.2-extra.tar.gz && \
+	wget ftp://ftp.vim.org/pub/vim/extra/vim-7.2-lang.tar.gz &&\
 	tar jxvf vim-7.3.tar.bz2  && \
 	tar zxvf vim-7.2-extra.tar.gz && \
 	tar zxvf vim-7.2-lang.tar.gz && \
@@ -60,9 +64,8 @@ if [ "$STEP3" = 1 ]; then
 	cd vim73/src && \
 	./configure --enable-multibyte --with-features=huge --disable-selinux --prefix='/usr/local/vim-7.3' && \
 	sudo make install && \
-    cd ~/.dotfiles/install_vim7.3/ &&\
-	rm -fr vim-7.3 &&\
-	cd ~/.dotfiles/	
+    cd ~/.dotfiles/ &&\
+	rm -fr install_vim7.3
 
 	RET=$?
 	if [ "$RET" != 0 ]; then
