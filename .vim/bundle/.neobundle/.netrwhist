@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/usr/local/vim-7.3'
+let g:netrw_dirhist_2='/home/user01/perl_training/Perl-test/Validation'
+let g:netrw_dirhist_3='/var/log/httpd'
+let g:netrw_dirhist_4='/var/www/cgi-bin/web_app/lib/VALIDATE'
+let g:netrw_dirhist_5='/var/www/cgi-bin/web_app/lib/CONTROL'
+let g:netrw_dirhist_6='/var/www/cgi-bin/web_app/Filter'
+let g:netrw_dirhist_7='/etc'
+let g:netrw_dirhist_8='/home/user01/Perl_勉強会/perl_study/hoshu/5_practice/noriyuki.suwa'
+let g:netrw_dirhist_9='/home/user01/Perl_勉強会/perl_study/hoshu/5_practice/yuki.hirako'
