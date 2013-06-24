@@ -129,6 +129,10 @@ endfunction
 	 return ""
  endfunction
 
+"テンプレートの設定================================
+autocmd BufNewFile *.pl 0r $HOME/.vim/template/perl-script.txt
+autocmd BufNewFile *.t  0r $HOME/.vim/template/perl-test.txt
+
  "パッケージ名の自動チェック========================
  function! s:check_package_name()
 	 let path = substitute(expand('%:p'), '\\', '/', 'g')
