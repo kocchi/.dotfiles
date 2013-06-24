@@ -16,8 +16,8 @@ if [ "$STEP1" = 1 ]; then
 
 	cd ~/ && \
 		chmod -R 777 .dotfiles/
-		ln -s .dotfiles/.vimrc .vimrc && \
-		ln -s .dotfiles/.vim/ .vim
+		ln -snf .dotfiles/.vimrc .vimrc && \
+		ln -snf .dotfiles/.vim/ .vim
 
 	RET=$?
 	if [ "$RET" != 0 ]; then
