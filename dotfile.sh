@@ -14,8 +14,9 @@ if [ "$STEP1" = 1 ]; then
 	echo "##### synboric link (.vimrc .vim/)"
 	echo "#####"
 
-	cd ~/.dotfiles/ && \
-	ln -s .vimrc .vim ../ 
+	cd ~/ && \
+		ln -s .dotfiles/.vimrc/ .vimrc && \
+		ln -s .dotfiles/.vim/ .vim
 
 	RET=$?
 	if [ "$RET" != 0 ]; then
@@ -32,9 +33,16 @@ if [ "$STEP2" = 1 ]; then
 	echo "##### copy (.bashrc .bash_profile)"
 	echo "#####"
 
-	cp .bashrc .bash_profile ../ && \
-	sudo cp .bash_profile.root /root/.bash_profile && \
-	sudo cp .bashrc.root /root/.bashrc 
+	cd ~/ && \
+		mv .bashrc .dashrc.org && \
+		mv .bash_profile .dash_profile.org && \
+		ln -s .dotfiles/.bashrc .dotfiles/.bash_profile . && \
+		sudo mv /root/.bashrc /root/.bashrc.org && \
+		sudo mv /root/.bash_profile /root/.bash_profile.org && \
+		sudo cp .dotfiles/.bashrc.root /root/.bashrc && \
+		sudo cp .dotfiles/.bash_profile.root /root/.bash_profile && \
+		source .bashrc && \
+		source .bash_profile
 
 	RET=$?
 	if [ "$RET" != 0 ]; then
@@ -65,7 +73,7 @@ if [ "$STEP3" = 1 ]; then
 	./configure --enable-multibyte --with-features=huge --disable-selinux --prefix='/usr/local/vim-7.3' && \
 	sudo make install && \
     cd ~/.dotfiles/ &&\
-	rm -fr install_vim7.3
+	sudo rm -fr install_vim7.3
 
 	RET=$?
 	if [ "$RET" != 0 ]; then
