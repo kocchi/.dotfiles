@@ -15,9 +15,11 @@ if [ "$STEP1" = 1 ]; then
 	echo "#####"
 
 	cd ~/ && \
-		chmod -R 777 .dotfiles/
-		ln -snf .dotfiles/.vimrc .vimrc && \
-		ln -snf .dotfiles/.vim/ .vim
+	ln -snf .dotfiles/.vimrc .vimrc && \
+	ln -snf .dotfiles/.vim/ .vim && \
+	cd ~/.vim/bundle/ && \
+	git clone https://github.com/Shougo/neobundle.vim && \
+	cd ~
 
 	RET=$?
 	if [ "$RET" != 0 ]; then
