@@ -14,9 +14,27 @@ NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/syntastic'
 
 ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 
+"===============================================
+" カラー設定
+"===============================================
+" シンタックスハイライトを有効にする
+"NeoBundle 'altercation/vim-colors-solarized'
+"syntax enable
+ "背景色を dark にする
+" set background=dark
+ " 輝度とコントラストは、最初はデフォルトを試すのがオススメです
+ " 自分はコントラストだけ高くしています
+ " 輝度を高くする
+let g:solarized_visibility = "high"
+ " コントラストを高くする
+let g:solarized_contrast = "high"
+ " カラースキーマを Solarized にする
+" colorscheme solarized
+"===============================================
 
 filetype plugin indent on     " required!
 filetype indent on
@@ -24,11 +42,19 @@ syntax on
 nmap <Leader>r <plug>(quickrun)
 
 
-set fileencodings=utf8,iso-2022-jp,cp932,euc-jp
+"set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,iso-2022-jp,shift-jis,euc-jp
 
 set number
 set laststatus=2
 set statusline=%f\ [%{&fenc==''?&enc:&fenc}][%{&ff}]%=%8l:%c%8P
+""自動でappach再起動
+autocmd BufWritePre * :! sudo /etc/init.d/httpd restart
+autocmd BufWritePre * :! sudo -E /home/training/script/tool/compile_smart
+
+
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -46,16 +72,6 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 " Select with <TAB>
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-let g:neocomplcache_ctags_arguments_list = {
-			\ 'perl' : '-R -h ".pm"'
-			\ }
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-			\ 'default'    : '',
-			\ 'perl'       : $HOME . '/.vim/dict/perl.dict'
-			\ }
 
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
@@ -119,32 +135,10 @@ endfunction
  inoremap <c-l> <right>
 
 
- function! s:get_package_name()
-	 let mx = '^\s*package\s\+\([^ ;]\+\)'
-	 for line in getline(1, 5)
-		 if line =~ mx
-			 return substitute(matchstr(line, mx), mx, '\1', '')
-		 endif
-	 endfor
-	 return ""
- endfunction
-
 "テンプレートの設定================================
 autocmd BufNewFile *.pl 0r $HOME/.vim/template/perl-script.txt
 autocmd BufNewFile *.t  0r $HOME/.vim/template/perl-test.txt
 
- "パッケージ名の自動チェック========================
- function! s:check_package_name()
-	 let path = substitute(expand('%:p'), '\\', '/', 'g')
-	 let name = substitute(s:get_package_name(), '::', '/', 'g') . '.pm'
-	 echohl WarningMsg
-	 echomsg "ぱっけーじめいと、ほぞんされているぱすが、ちがうきがします！"
-	 echomsg "ちゃんとなおしてください＞＜"
-	 echohl None
- endif
-											      endfunction
-
-au! BufWritePost *.pm call s:check_package_name()
 "===================================================
 "
 
@@ -165,6 +159,8 @@ set laststatus=2 "ステータスラインを常に表示する
 
 set shiftwidth=4    "行頭での<Tab>の幅
 set tabstop=4   "行頭以外での<Tab>の幅
+set autoindent
+set expandtab
 
 
 

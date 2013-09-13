@@ -1,8 +1,8 @@
 #!/bin/sh
 
 STEP1=1
-STEP2=1
-STEP3=1
+STEP2=0
+STEP3=0
 
 
 STARTDIR=`pwd`
