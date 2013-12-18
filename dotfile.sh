@@ -15,8 +15,8 @@ if [ "$STEP1" = 1 ]; then
 	echo "#####"
 
 	cd ~/ && \
-	ln -snf .dotfiles/.vimrc .vimrc && \
-	ln -snf .dotfiles/.vim/ .vim && \
+	ln -snf dotfiles/.vimrc .vimrc && \
+	ln -snf dotfiles/.vim/ .vim && \
 	cd ~/.vim/bundle/ && \
 	git clone https://github.com/Shougo/neobundle.vim && \
 	cd ~

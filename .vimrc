@@ -19,21 +19,23 @@ NeoBundle 'scrooloose/syntastic'
 ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 
 "===============================================
-" ã‚«ãƒ©ãƒ¼è¨­å®š
+" ¥«¥é¡¼ÀßÄê
 "===============================================
-" ã‚·ãƒ³ã‚¿ãƒƒã‚¯ã‚¹ãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’æœ‰åŠ¹ã«ã™ã‚‹
+" ¥·¥ó¥¿¥Ã¥¯¥¹¥Ï¥¤¥é¥¤¥È¤òÍ­¸ú¤Ë¤¹¤ë
 "NeoBundle 'altercation/vim-colors-solarized'
 "syntax enable
- "èƒŒæ™¯è‰²ã‚’ dark ã«ã™ã‚‹
-" set background=dark
- " è¼åº¦ã¨ã‚³ãƒ³ãƒˆãƒ©ã‚¹ãƒˆã¯ã€æœ€åˆã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚’è©¦ã™ã®ãŒã‚ªã‚¹ã‚¹ãƒ¡ã§ã™
- " è‡ªåˆ†ã¯ã‚³ãƒ³ãƒˆãƒ©ã‚¹ãƒˆã ã‘é«˜ãã—ã¦ã„ã¾ã™
- " è¼åº¦ã‚’é«˜ãã™ã‚‹
+ "ÇØ·Ê¿§¤ò dark ¤Ë¤¹¤ë
+"set background=dark
+ " µ±ÅÙ¤È¥³¥ó¥È¥é¥¹¥È¤Ï¡¢ºÇ½é¤Ï¥Ç¥Õ¥©¥ë¥È¤ò»î¤¹¤Î¤¬¥ª¥¹¥¹¥á¤Ç¤¹
+ " ¼«Ê¬¤Ï¥³¥ó¥È¥é¥¹¥È¤À¤±¹â¤¯¤·¤Æ¤¤¤Ş¤¹
+ " µ±ÅÙ¤ò¹â¤¯¤¹¤ë
 let g:solarized_visibility = "high"
- " ã‚³ãƒ³ãƒˆãƒ©ã‚¹ãƒˆã‚’é«˜ãã™ã‚‹
+ " ¥³¥ó¥È¥é¥¹¥È¤ò¹â¤¯¤¹¤ë
 let g:solarized_contrast = "high"
- " ã‚«ãƒ©ãƒ¼ã‚¹ã‚­ãƒ¼ãƒã‚’ Solarized ã«ã™ã‚‹
+ " ¥«¥é¡¼¥¹¥­¡¼¥Ş¤ò Solarized ¤Ë¤¹¤ë
 " colorscheme solarized
+"
+"source ~/.dotfiles/.vimrc.colors
 "===============================================
 
 filetype plugin indent on     " required!
@@ -42,17 +44,19 @@ syntax on
 nmap <Leader>r <plug>(quickrun)
 
 
-"set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,utf-8
-set termencoding=utf-8
+"set termencoding=utf-8
+"set fileencodings=euc-jp,iso-2022-jp,shift-jis
+set fileencodings=euc-jp,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932,
+set fileencoding=euc-jp
 set encoding=utf-8
-set fileencodings=utf-8,iso-2022-jp,shift-jis,euc-jp
 
 set number
 set laststatus=2
 set statusline=%f\ [%{&fenc==''?&enc:&fenc}][%{&ff}]%=%8l:%c%8P
-""è‡ªå‹•ã§appachå†èµ·å‹•
-autocmd BufWritePre * :! sudo /etc/init.d/httpd restart
-autocmd BufWritePre * :! sudo -E /home/training/script/tool/compile_smart
+""¼«Æ°¤ÇappachºÆµ¯Æ°
+autocmd BufWritePre * :! sudo apachectl restart
+autocmd BufWritePre * :! perltidy
+"autocmd BufWritePre * :! sudo -E /home/training/script/tool/compile_smart
 
 
 
@@ -95,14 +99,14 @@ function! s:Gcc()
 endfunction
 "-----------------------------------------------------------------------------
 
-" ESCã‚­ãƒ¼ã‚’2å›æŠ¼ã™ã¨çµ‚äº†ã™ã‚‹
+" ESC¥­¡¼¤ò2²ó²¡¤¹¤È½ªÎ»¤¹¤ë
  au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
  au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
- "ã‚«ãƒ¼ã‚½ãƒ«è¡Œã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+ "¥«¡¼¥½¥ë¹Ô¤ò¥Ï¥¤¥é¥¤¥È
  set cursorline
  set cursorcolumn
- " ã‚«ãƒ¬ãƒ³ãƒˆã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«ã®ã¿ç½«ç·šã‚’å¼•ã
+ " ¥«¥ì¥ó¥È¥¦¥£¥ó¥É¥¦¤Ë¤Î¤ß·ÓÀş¤ò°ú¤¯
  augroup cch
 	 autocmd! cch
 	 autocmd WinLeave * set nocursorline
@@ -123,11 +127,11 @@ endfunction
  hi Cursorcolumn gui=underline
  highlight CursorColumn ctermbg=black guibg=black
 
- ".tã¨.psgiã®ã‚·ãƒ³ã‚¿ãƒƒã‚¯ã‚¹ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+ ".t¤È.psgi¤Î¥·¥ó¥¿¥Ã¥¯¥¹¥Ï¥¤¥é¥¤¥È
  autocmd BufNewFile,BufRead *.psgi   set filetype=perl
  autocmd BufNewFile,BufRead *.t      set filetype=perl
 
-"" æŒ¿å…¥ãƒ¢ãƒ¼ãƒ‰ä¸­ã«'Ctr-*'ã§ã‚³ãƒãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã§ã®ç§»å‹•ãƒ»å‰Šé™¤ã‚’å¯èƒ½ã«ã™ã‚‹
+"" ÁŞÆş¥â¡¼¥ÉÃæ¤Ë'Ctr-*'¤Ç¥³¥Ş¥ó¥É¥â¡¼¥É¤Ç¤Î°ÜÆ°¡¦ºï½ü¤ò²ÄÇ½¤Ë¤¹¤ë
  inoremap <c-d> <delete>
  inoremap <c-j> <down>
  inoremap <c-k> <up>
@@ -135,35 +139,34 @@ endfunction
  inoremap <c-l> <right>
 
 
-"ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã®è¨­å®š================================
+"¥Æ¥ó¥×¥ì¡¼¥È¤ÎÀßÄê================================
 autocmd BufNewFile *.pl 0r $HOME/.vim/template/perl-script.txt
 autocmd BufNewFile *.t  0r $HOME/.vim/template/perl-test.txt
 
 "===================================================
 "
 
-"ä¿å­˜ã—ã¦å®Ÿè¡Œ
+"ÊİÂ¸¤·¤Æ¼Â¹Ô
 "":w + !perl command
 map <F4>  :w !perl<CR>
 "!perl command
 map <F5>  :!perl %<CR>
 
 
+set title "ÊÔ½¸Ãæ¤Î¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¼¨¤¹¤ë
+set showcmd "ÆşÎÏÃæ¤Î¥³¥Ş¥ó¥É¤òÉ½¼¨¤¹¤ë
+set ruler "ºÂÉ¸¤òÉ½¼¨¤¹¤ë
+set showmatch   "ÊÄ¤¸³ç¸Ì¤ÎÆşÎÏ»ş¤ËÂĞ±ş¤¹¤ë³ç¸Ì¤òÉ½¼¨¤¹¤ë
+set matchtime=3 "showmatch¤ÎÉ½¼¨»ş´Ö
+set laststatus=2 "¥¹¥Æ¡¼¥¿¥¹¥é¥¤¥ó¤ò¾ï¤ËÉ½¼¨¤¹¤ë
 
-set title "ç·¨é›†ä¸­ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¡¨ç¤ºã™ã‚‹
-set showcmd "å…¥åŠ›ä¸­ã®ã‚³ãƒãƒ³ãƒ‰ã‚’è¡¨ç¤ºã™ã‚‹
-set ruler "åº§æ¨™ã‚’è¡¨ç¤ºã™ã‚‹
-set showmatch   "é–‰ã˜æ‹¬å¼§ã®å…¥åŠ›æ™‚ã«å¯¾å¿œã™ã‚‹æ‹¬å¼§ã‚’è¡¨ç¤ºã™ã‚‹
-set matchtime=3 "showmatchã®è¡¨ç¤ºæ™‚é–“
-set laststatus=2 "ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã‚’å¸¸ã«è¡¨ç¤ºã™ã‚‹
-
-set shiftwidth=4    "è¡Œé ­ã§ã®<Tab>ã®å¹…
-set tabstop=4   "è¡Œé ­ä»¥å¤–ã§ã®<Tab>ã®å¹…
+set shiftwidth=4    "¹ÔÆ¬¤Ç¤Î<Tab>¤ÎÉı
+set tabstop=4   "¹ÔÆ¬°Ê³°¤Ç¤Î<Tab>¤ÎÉı
 set autoindent
-set expandtab
+"set expandtab
+set list
+set listchars=tab:>-,extends:<,trail:-
 
-
-
-"å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¦–è¦šåŒ–
+"Á´³Ñ¥¹¥Ú¡¼¥¹¤ò»ë³Ğ²½
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
-au BufNewFile,BufRead * match ZenkakuSpace /ã€€/
+au BufNewFile,BufRead * match ZenkakuSpace /¡¡/
