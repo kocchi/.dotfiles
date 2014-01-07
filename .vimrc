@@ -6,6 +6,10 @@ if has('vim_starting')
 	set runtimepath+=~/.vim/bundle/neobundle.vim
 	call neobundle#rc(expand('~/.vim/bundle/'))
 endif
+
+" Let NeoBundle manage NeoBundle
+ NeoBundleFetch 'Shougo/neobundle.vim'
+
 " originalrepos on github
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
@@ -15,6 +19,12 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
+
+"クリップボード利用の設定追加
+NeoBundle 'kana/vim-fakeclip.git'
+set clipboard=unnamed
+
+NeoBundleCheck
 
 ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 
@@ -42,6 +52,9 @@ filetype plugin indent on     " required!
 filetype indent on
 syntax on
 nmap <Leader>r <plug>(quickrun)
+
+"スペルチェック
+set spell
 
 
 "set termencoding=utf-8
