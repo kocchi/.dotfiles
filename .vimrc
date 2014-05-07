@@ -19,12 +19,68 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
 "クリップボード利用の設定追加
 NeoBundle 'kana/vim-fakeclip.git'
+NeoBundle 'Shougo/neomru.vim'
 set clipboard=unnamed
 
 NeoBundleCheck
+
+
+
+"" unite.vim {{{
+    " The prefix key.
+    nnoremap    [unite]   <Nop>
+    nmap    <Leader>f [unite]
+
+    " unite.vim keymap
+    " https://github.com/alwei/dotfiles/blob/3760650625663f3b08f24bc75762ec843ca7e112/.vimrc
+    nnoremap [unite]u  :<C-u>Unite -no-split<Space>
+    nnoremap <silent> [unite]f :<C-u>Unite<Space>buffer<CR>
+    nnoremap <silent> [unite]b :<C-u>Unite<Space>bookmark<CR>
+    nnoremap <silent> [unite]m :<C-u>Unite<Space>file_mru<CR>
+    nnoremap <silent> [unite]r :<C-u>UniteWithBufferDir file<CR>
+    nnoremap <silent> ,vr :UniteResume<CR>
+
+    " vinarise
+    let g:vinarise_enable_auto_detect = 1
+
+    " unite-build map
+    nnoremap <silent> ,vb :Unite build<CR>
+    nnoremap <silent> ,vcb :Unite build:!<CR>
+    nnoremap <silent> ,vch :UniteBuildClearHighlight<CR>
+"" }}}
+
+"" unite-grep {{{
+    " insert modeで開始
+    let g:unite_enable_start_insert = 1
+
+    " 大文字小文字を区別しない
+    let g:unite_enable_ignore_case = 1
+    let g:unite_enable_smart_case = 1
+    " unite-grepのキーマップ
+    " grep検索
+    nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+    " カーソル位置の単語をgrep検索
+    nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+
+    " grep検索結果の再呼出
+    nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+
+    " 選択した文字列をunite-grep
+    " https://github.com/shingokatsushima/dotfiles/blob/master/.vimrc
+    vnoremap /g y:Unite grep::-iHRn:<C-R>=escape(@", '\\.*$^[]')<CR><CR>
+" }}}
 
 ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
 
@@ -67,8 +123,8 @@ set number
 set laststatus=2
 set statusline=%f\ [%{&fenc==''?&enc:&fenc}][%{&ff}]%=%8l:%c%8P
 ""自動でappach再起動
-autocmd BufWritePre * :! sudo apachectl restart
-autocmd BufWritePre * :! perltidy
+"autocmd BufWritePre * :! sudo apachectl restart
+"autocmd BufWritePre * :! perltidy
 "autocmd BufWritePre * :! sudo -E /home/training/script/tool/compile_smart
 
 
@@ -176,7 +232,7 @@ set laststatus=2 "ステータスラインを常に表示する
 set shiftwidth=4    "行頭での<Tab>の幅
 set tabstop=4   "行頭以外での<Tab>の幅
 set autoindent
-"set expandtab
+set expandtab
 set list
 set listchars=tab:>-,extends:<,trail:-
 
